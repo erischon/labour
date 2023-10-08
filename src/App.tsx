@@ -1,7 +1,15 @@
+import Header from "./components/layouts/Header";
+import Main from "./components/layouts/Main";
+import Footer from "./components/layouts/Footer";
+
 function App() {
   return (
     <>
-      <h1 className="text-2xl">Labour</h1>
+      <Header />
+
+      <Main />
+
+      <Footer />
     </>
   );
 }
