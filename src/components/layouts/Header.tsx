@@ -8,7 +8,9 @@ export default function Header() {
           <HiPencilSquare />
         </span>
 
-        <h2 className="text-2xl font-bold font-heading">Labour</h2>
+        <h2 className="text-2xl font-bold font-heading tracking-wider">
+          Labour
+        </h2>
       </div>
 
       <nav>
