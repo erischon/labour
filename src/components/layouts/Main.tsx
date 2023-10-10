@@ -1,14 +1,34 @@
 import { useEffect, useState } from "react";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { redirect } from "react-router-dom";
+
+import { BiEdit, BiTrash } from "react-icons/bi";
 
 import { db } from "../../libs/firebase";
+import FormAddTask from "../FormAddTask";
 
+type Task = {
+  id?: string;
+  taskName?: string;
+  createdAt?: Date;
+};
+
+/**
+ * @description Main layout
+ * @version 1.0.0
+ */
 export default function Main() {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   // Add a new task with a generated id.
-  async function addTask(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function addTask(e) {
     e.preventDefault();
 
     try {
@@ -27,39 +47,40 @@ export default function Main() {
   async function getAllTasks() {
     const querySnapshot = await getDocs(collection(db, "tasks"));
 
-    const taskData: any = [];
+    const tasksData: Task[] = [];
 
     querySnapshot.forEach((doc) => {
-      taskData.push({ id: doc.id, ...doc.data() });
+      tasksData.push({ id: doc.id, ...doc.data() });
     });
 
-    setTasks(taskData);
+    setTasks(tasksData);
+  }
+
+  // Delete a task.
+  async function deleteTask(id: string) {
+    await deleteDoc(doc(db, "tasks", id));
+
+    return redirect("/login");
   }
 
   useEffect(() => {
     if (!tasks.length) {
       getAllTasks();
     }
-  }, []);
+  }, [tasks.length]);
 
   return (
     <main>
-      <div className="flex gap-2">
-        <input
-          className="text-black p-2"
-          type="text"
-          placeholder="What do you have to do today?"
-          onChange={(e) => setTask(e.target.value)}
-        />
-
-        <button type="submit" onClick={addTask}>
-          add task
-        </button>
-      </div>
+      <FormAddTask setTask={setTask} addTask={addTask} />
 
       {tasks?.map((task) => (
-        <div key={task.id}>
+        <div key={task.id} className="flex justify-start items-center">
           <p>{task.taskName}</p>
+
+          <BiTrash
+            className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
+            onClick={() => deleteTask(task.id)}
+          />
         </div>
       ))}
     </main>
