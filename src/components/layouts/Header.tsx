@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { HiPencilSquare } from "react-icons/hi2";
 
 export default function Header() {
@@ -19,7 +21,9 @@ export default function Header() {
         </ul>
       </nav>
 
-      <button className="py-2 px-9 bg-slate-500">bouton</button>
+      <Link to="addTask">
+        <button className="py-2 px-9 bg-slate-500">bouton</button>
+      </Link>
     </header>
   );
 }

@@ -12,6 +12,7 @@ import { BiEdit, BiTrash } from "react-icons/bi";
 
 import { db } from "../../libs/firebase";
 import FormAddTask from "../FormAddTask";
+import Modal from "../Modal";
 
 type Task = {
   id?: string;
@@ -30,7 +31,7 @@ export default function Main() {
   const navigate = useNavigate();
 
   // Add a new task with a generated id.
-  async function addTask(e) {
+  async function addTask(e: any) {
     e.preventDefault();
 
     try {
