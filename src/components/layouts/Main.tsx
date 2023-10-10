@@ -6,7 +6,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { BiEdit, BiTrash } from "react-icons/bi";
 
@@ -27,6 +27,8 @@ export default function Main() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  const navigate = useNavigate();
+
   // Add a new task with a generated id.
   async function addTask(e) {
     e.preventDefault();
@@ -38,6 +40,7 @@ export default function Main() {
       });
 
       console.log("Document written with ID: ", docRef.id);
+      setTask("");
     } catch (e) {
       console.error("Error adding task: ", e);
     }
@@ -60,7 +63,7 @@ export default function Main() {
   async function deleteTask(id: string) {
     await deleteDoc(doc(db, "tasks", id));
 
-    return redirect("/login");
+    return navigate("/");
   }
 
   useEffect(() => {
@@ -81,6 +84,8 @@ export default function Main() {
             className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
             onClick={() => deleteTask(task.id)}
           />
+
+          <BiEdit />
         </div>
       ))}
     </main>
