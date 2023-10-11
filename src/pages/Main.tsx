@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import {
   collection,
-  addDoc,
   getDocs,
   deleteDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-import { BiEdit, BiTrash } from "react-icons/bi";
-
 import { db } from "../libs/firebase";
-import FormAddTask from "../components/FormAddTask";
+import { TaskItem } from "../components/TaskItem";
 
 type Task = {
-  id?: string;
-  taskName?: string;
-  createdAt?: Date;
+  id: string;
+  taskName: string;
+  createdAt: Date;
+  isDone: boolean;
 };
 
 /**
@@ -24,26 +23,9 @@ type Task = {
  * @version 1.0.0
  */
 export default function Main() {
-  const [task, setTask] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const navigate = useNavigate();
-
-  // Add a new task with a generated id.
-  async function addTask(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    try {
-      const docRef = await addDoc(collection(db, "tasks"), {
-        taskName: task,
-        createdAt: new Date(),
-      });
-
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding task: ", e);
-    }
-  }
 
   // Get all tasks.
   async function getAllTasks() {
@@ -52,7 +34,7 @@ export default function Main() {
     const tasksData: Task[] = [];
 
     querySnapshot.forEach((doc) => {
-      tasksData.push({ id: doc.id, ...doc.data() });
+      tasksData.push({ id: doc.id, ...doc.data() } as Task);
     });
 
     setTasks(tasksData);
@@ -65,6 +47,20 @@ export default function Main() {
     return navigate("/");
   }
 
+  /**
+   * @description Toggle task, set isDone to true or false
+   * @version 1.0.0
+   * @param id  The id of the task
+   * @param isDone  The status of the task
+   */
+  async function toggleTask(id: string, isDone: boolean) {
+    const docRef = doc(db, "tasks", id);
+
+    await updateDoc(docRef, {
+      isDone: !isDone,
+    });
+  }
+
   useEffect(() => {
     if (!tasks.length) {
       getAllTasks();
@@ -72,21 +68,24 @@ export default function Main() {
   }, [tasks.length]);
 
   return (
-    <main>
-      <FormAddTask setTask={setTask} addTask={addTask} />
-
-      {tasks?.map((task) => (
-        <div key={task.id} className="flex justify-start items-center">
-          <p>{task.taskName}</p>
-
-          <BiTrash
-            className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
-            onClick={() => task.id && deleteTask(task.id)}
-          />
-
-          <BiEdit />
+    <main className="my-10">
+      <div className="w-full">
+        <div className="grid grid-cols-12 px-5 py-2 mb-4 bg-slate-700 rounded-sm">
+          <div className="col-span-10 font-semibold">Tasks</div>
+          <div className="col-span-2 text-center font-semibold">Actions</div>
         </div>
-      ))}
+
+        <div className="">
+          {tasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              {...task}
+              toggleTask={toggleTask}
+              deleteTask={deleteTask}
+            />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
