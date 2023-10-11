@@ -1,15 +1,24 @@
+import { useState } from "react";
+
 import Header from "./components/layouts/Header";
 import Main from "./pages/Main";
 import Footer from "./components/layouts/Footer";
 
+import { TaskContextProvider } from "./libs/TaskContext";
+import { Todo } from "./store";
+
 function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
   return (
     <>
-      <Header />
+      <TaskContextProvider>
+        <Header />
 
-      <Main />
+        <Main todos={todos} setTodos={setTodos} />
 
-      <Footer />
+        <Footer />
+      </TaskContextProvider>
     </>
   );
 }
