@@ -1,6 +1,10 @@
 import { useRouteError } from "react-router-dom";
 
-export default function ErrorPage() {
+/**
+ * @description Error page component
+ * @version 1.0.0
+ */
+export default function ErrorPage(): JSX.Element {
   const error: unknown = useRouteError();
   console.error(error);
 

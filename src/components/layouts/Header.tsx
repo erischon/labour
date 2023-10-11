@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../libs/firebase";
+
 import { HiPencilSquare } from "react-icons/hi2";
+import { MdAddTask } from "react-icons/md";
+
+import { db } from "../../libs/firebase";
 import Modal from "../Modal";
 import FormAddTask from "../FormAddTask";
 
@@ -31,7 +33,11 @@ export default function Header() {
   return (
     <>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <FormAddTask setTask={setTask} addTask={addTask} />
+        <FormAddTask
+          setTask={setTask}
+          addTask={addTask}
+          onClose={() => setOpen(false)}
+        />
       </Modal>
 
       <header className="flex justify-between items-center px-10 py-5">
@@ -54,10 +60,13 @@ export default function Header() {
         </nav>
 
         <button
-          className="py-2 px-9 bg-slate-500"
+          className="py-2 px-6 bg-slate-500 flex items-center gap-2"
           onClick={() => setOpen(true)}
         >
-          bouton
+          <div className="text-xl text-slate-100">
+            <MdAddTask />
+          </div>
+          Add Task
         </button>
       </header>
     </>
