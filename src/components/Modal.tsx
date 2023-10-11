@@ -1,23 +1,42 @@
 import { AiOutlineClose } from "react-icons/ai";
 
+type ModalProps = {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
+
 /**
  * @description Modal component
  * @version 1.0.0
  */
-export default function Modal() {
+export default function Modal({ open, onClose, children }: ModalProps) {
   return (
-    <dialog open className="fixed rounded-xl backdrop:bg-slate-800/90">
-      <div className="w-full max-w-full bg-slate-300 flex flex-col">
-        <div className="flex flex-row justify-between py-5 px-10 bg-slate-400">
-          <h1 className="text-2xl font-semibold">title</h1>
-
-          <button className="py-1 px-2 cursor-pointer rounded-full border-none w-8 h-8 font-bold bg-slate-600 hover:bg-slate-600/70 text-white">
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        className={`fixed inset-0 flex justify-center items-center transition-colors ${
+          open ? "visible bg-slate-800/90" : "invisible"
+        }`}
+      >
+        {/* Modal */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={`bg-slate-100 rounded-xl p-6 transition-all ${
+            open ? "scale-100 opacity-100" : "scale-125 opacity-0"
+          }`}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-2 right-2 p-1 rounded-full text-slate-900 hover:bg-slate-300 text-xl"
+          >
             <AiOutlineClose />
           </button>
-        </div>
 
-        <div className="px-10 py-10">modalContent</div>
+          {children}
+        </div>
       </div>
-    </dialog>
+    </>
   );
 }

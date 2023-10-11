@@ -10,9 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 import { BiEdit, BiTrash } from "react-icons/bi";
 
-import { db } from "../../libs/firebase";
-import FormAddTask from "../FormAddTask";
-import Modal from "../Modal";
+import { db } from "../libs/firebase";
+import FormAddTask from "../components/FormAddTask";
 
 type Task = {
   id?: string;
@@ -31,7 +30,7 @@ export default function Main() {
   const navigate = useNavigate();
 
   // Add a new task with a generated id.
-  async function addTask(e: any) {
+  async function addTask(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     try {
@@ -41,7 +40,6 @@ export default function Main() {
       });
 
       console.log("Document written with ID: ", docRef.id);
-      setTask("");
     } catch (e) {
       console.error("Error adding task: ", e);
     }
@@ -83,7 +81,7 @@ export default function Main() {
 
           <BiTrash
             className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
-            onClick={() => deleteTask(task.id)}
+            onClick={() => task.id && deleteTask(task.id)}
           />
 
           <BiEdit />

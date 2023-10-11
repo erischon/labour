@@ -1,6 +1,6 @@
 type FormAddTaskProps = {
   setTask: (task: string) => void;
-  addTask: () => void;
+  addTask: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
 /**
@@ -8,9 +8,15 @@ type FormAddTaskProps = {
  * @version 1.0.0
  */
 export default function FormAddTask({ setTask, addTask }: FormAddTaskProps) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await addTask(e);
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
         <div className="flex gap-2">
           <input
             className="text-black p-2"
@@ -19,9 +25,7 @@ export default function FormAddTask({ setTask, addTask }: FormAddTaskProps) {
             onChange={(e) => setTask(e.target.value)}
           />
 
-          <button type="submit" onClick={addTask}>
-            add task
-          </button>
+          <button type="submit">add task</button>
         </div>
       </form>
     </>
