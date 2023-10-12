@@ -1,5 +1,7 @@
 import { BiEdit, BiTrash } from "react-icons/bi";
 
+import { useModalContext } from "../contexts/ModalContext";
+
 type TaskItemProps = {
   id: string;
   taskName: string;
@@ -19,6 +21,8 @@ export function TaskItem({
   toggleTask,
   deleteTask,
 }: TaskItemProps) {
+  const { setOpenEdit } = useModalContext();
+
   return (
     <div className="grid grid-cols-12 px-5 py-1">
       <div className="col-span-10 flex gap-2 items-center">
@@ -44,7 +48,10 @@ export function TaskItem({
           onClick={() => deleteTask(id)}
         />
 
-        <BiEdit />
+        <BiEdit
+          className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
+          onClick={() => setOpenEdit(true)}
+        />
       </div>
     </div>
   );

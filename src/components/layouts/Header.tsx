@@ -8,9 +8,11 @@ import { MdAddTask } from "react-icons/md";
 import { db } from "../../libs/firebase";
 import Modal from "../Modal";
 import FormAddTask from "../FormAddTask";
+import FormEditTask from "../FormEditTask";
+import { useModalContext } from "../../contexts/ModalContext";
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, openEdit, setOpenEdit } = useModalContext();
   const [task, setTask] = useState("");
 
   // Add a new task with a generated id.
@@ -32,7 +34,7 @@ export default function Header() {
 
   return (
     <>
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal open={open} onClose={() => setOpen(false)} title="Add Task">
         <FormAddTask
           setTask={setTask}
           addTask={addTask}
@@ -40,7 +42,19 @@ export default function Header() {
         />
       </Modal>
 
-      <header className="flex justify-between items-center px-10 py-5">
+      <Modal
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        title="Edit Task"
+      >
+        <FormEditTask
+          setTask={setTask}
+          addTask={addTask}
+          onClose={() => setOpen(false)}
+        />
+      </Modal>
+
+      <header className="flex justify-between items-center px-10 py-5 max-w-5xl mx-auto">
         <Link to="/" className="flex items-center gap-1">
           <span className="text-2xl">
             <HiPencilSquare />

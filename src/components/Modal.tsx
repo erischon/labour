@@ -1,6 +1,7 @@
 import { AiOutlineClose } from "react-icons/ai";
 
 type ModalProps = {
+  title: string;
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
@@ -10,7 +11,7 @@ type ModalProps = {
  * @description Modal component
  * @version 1.0.0
  */
-export default function Modal({ open, onClose, children }: ModalProps) {
+export default function Modal({ title, open, onClose, children }: ModalProps) {
   return (
     <>
       {/* Backdrop */}
@@ -28,7 +29,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           }`}
         >
           <div className="flex flex-col p-5">
-            <h2 className="text-2xl text-slate-900 font-bold mb-3">Add Task</h2>
+            <h2 className="text-2xl text-slate-900 font-bold mb-3">{title}</h2>
 
             <div>{children}</div>
           </div>

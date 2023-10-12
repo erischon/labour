@@ -44,7 +44,7 @@ export default function Main() {
   }, [isModified, setIsModified, setTasks]);
 
   return (
-    <main className="my-10">
+    <main className="my-10 px-10 py-5 max-w-4xl mx-auto">
       <div className="w-full">
         <div className="grid grid-cols-12 px-5 py-2 mb-4 bg-slate-700 rounded-sm">
           <div className="col-span-10 font-semibold">Tasks</div>

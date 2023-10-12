@@ -1,4 +1,5 @@
 import { TaskContextProvider } from "./contexts/TaskContext.tsx";
+import { ModalContextProvider } from "./contexts/ModalContext.tsx";
 
 import Main from "./pages/Main";
 
@@ -9,11 +10,15 @@ function App() {
   return (
     <>
       <TaskContextProvider>
-        <Header />
+        <ModalContextProvider>
+          <div>
+            <Header />
 
-        <Main />
+            <Main />
 
-        <Footer />
+            <Footer />
+          </div>
+        </ModalContextProvider>
       </TaskContextProvider>
     </>
   );
