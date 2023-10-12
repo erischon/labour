@@ -18,8 +18,10 @@ type Task = {
   isDone: boolean;
 };
 
+// Create a context object.
 const TaskContext = createContext<TaskContext | null>(null); // default value for the context when you consume it outside of a provider
 
+// Create a provider
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isModified, setIsModified] = useState<boolean>(true); // this is used to trigger a re-render when the tasks are modified
@@ -33,6 +35,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   );
 }
 
+// Create a custom hook to consume the context
 export function useTaskContext() {
   const context = useContext(TaskContext);
 

@@ -1,5 +1,3 @@
-// import { useNavigate } from "react-router-dom";
-
 import { useTaskContext } from "../contexts/TaskContext";
 
 type FormAddTaskProps = {
@@ -18,14 +16,12 @@ export default function FormAddTask({
   onClose,
 }: FormAddTaskProps) {
   const { setIsModified } = useTaskContext();
-  // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     await addTask(e);
     setIsModified(true);
-    // navigate(0);
     onClose();
   };
 
