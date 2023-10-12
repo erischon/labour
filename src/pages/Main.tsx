@@ -1,32 +1,24 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect } from "react";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 import { db } from "../libs/firebase";
 import { TaskItem } from "../components/TaskItem";
+import { useTaskContext } from "../contexts/TaskContext";
 
 import { getAllTasks } from "../libs/getAllTasks";
-import { TaskContext } from "../libs/TaskContext";
-
-type Task = {
-  id: string;
-  taskName: string;
-  createdAt: Date;
-  isDone: boolean;
-};
 
 /**
  * @description Main layout
  * @version 1.0.0
  */
-export default function Main({ todos, setTodos }: any) {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const context = useContext(TaskContext);
-
-  console.log("====== context", context);
+export default function Main() {
+  const { tasks, setTasks, isModified, setIsModified } = useTaskContext();
 
   // Delete a task.
   async function deleteTask(id: string) {
     await deleteDoc(doc(db, "tasks", id));
+
+    setIsModified(true);
   }
 
   // Toggle a task.
@@ -39,22 +31,17 @@ export default function Main({ todos, setTodos }: any) {
   }
 
   useEffect(() => {
-    let cancel = false;
+    const fetchData = async () => {
+      const newTask = await getAllTasks();
 
-    async function fetchData() {
-      const newTasks = await getAllTasks();
-
-      if (!cancel) {
-        setTasks(newTasks);
-      }
-    }
-
-    fetchData();
-
-    return () => {
-      cancel = true;
+      setTasks(newTask);
     };
-  }, []);
+
+    if (isModified) {
+      fetchData();
+      setIsModified(false);
+    }
+  }, [isModified, setIsModified, setTasks]);
 
   return (
     <main className="my-10">
