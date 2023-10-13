@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { BiEdit, BiTrash } from "react-icons/bi";
 
 import { useModalContext } from "../contexts/ModalContext";
@@ -6,7 +8,7 @@ type TaskItemProps = {
   id: string;
   taskName: string;
   isDone: boolean;
-  toggleTask: (id: string, complete: boolean) => void;
+  toggleTask: (id: string, isDone: boolean) => void;
   deleteTask: (id: string) => void;
 };
 
@@ -21,7 +23,12 @@ export function TaskItem({
   toggleTask,
   deleteTask,
 }: TaskItemProps) {
+  const [isDoneTask, setIsDoneTask] = useState(isDone);
   const { setOpenEdit } = useModalContext();
+
+  useEffect(() => {
+    setIsDoneTask(isDone);
+  }, [isDone]);
 
   return (
     <div className="grid grid-cols-12 px-5 py-1">
@@ -30,8 +37,8 @@ export function TaskItem({
           id={id}
           type="checkbox"
           className="cursor-pointer peer"
-          defaultChecked={isDone}
-          onChange={(e) => toggleTask(id, e.target.checked)}
+          defaultChecked={isDoneTask}
+          onChange={() => toggleTask(id, isDoneTask)}
         />
 
         <label
