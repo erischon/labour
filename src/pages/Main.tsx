@@ -47,7 +47,7 @@ export default function Main() {
   }, [isModified, setIsModified, setTasks]);
 
   return (
-    <main className="my-10 px-10 py-5 max-w-4xl mx-auto">
+    <main className="my-10 px-10 py-5 w-full max-w-4xl mx-auto">
       <div className="w-full">
         <div className="grid grid-cols-12 px-5 py-2 mb-3 bg-slate-700 rounded-sm">
           <div className="col-span-10 flex items-center">
@@ -69,22 +69,22 @@ export default function Main() {
                 <input
                   type="radio"
                   name="filter"
-                  value="done"
-                  checked={filter === "done"}
-                  onChange={() => setFilter("done")}
+                  value="undone"
+                  checked={filter === "undone"}
+                  onChange={() => setFilter("undone")}
                 />{" "}
-                Done
+                Undone
               </label>
 
               <label>
                 <input
                   type="radio"
                   name="filter"
-                  value="undone"
-                  checked={filter === "undone"}
-                  onChange={() => setFilter("undone")}
+                  value="done"
+                  checked={filter === "done"}
+                  onChange={() => setFilter("done")}
                 />{" "}
-                Undone
+                Done
               </label>
             </div>
           </div>

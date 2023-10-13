@@ -11,10 +11,12 @@ function App() {
     <>
       <TaskContextProvider>
         <ModalContextProvider>
-          <div>
+          <div className="w-full h-screen flex flex-col justify-between">
             <Header />
 
-            <Main />
+            <div className="flex-1">
+              <Main />
+            </div>
 
             <Footer />
           </div>

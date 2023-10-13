@@ -54,7 +54,7 @@ export default function Header() {
         />
       </Modal>
 
-      <header className="flex justify-between items-center px-10 py-5 max-w-5xl mx-auto">
+      <header className="flex justify-between items-center w-full px-10 py-5 max-w-5xl mx-auto">
         <Link to="/" className="flex items-center gap-1">
           <span className="text-2xl">
             <HiPencilSquare />
