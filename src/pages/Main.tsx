@@ -53,8 +53,8 @@ export default function Main() {
           <div className="col-span-10 flex items-center">
             <p className="mr-10 font-semibold">Tasks</p>
 
-            <div className="flex items-end gap-6 text-sm h-full">
-              <label>
+            <div className="flex items-end gap-6 text-sm font-thin h-full">
+              <label className="flex gap-2">
                 <input
                   type="radio"
                   name="filter"
@@ -65,7 +65,7 @@ export default function Main() {
                 All
               </label>
 
-              <label>
+              <label className="flex gap-2">
                 <input
                   type="radio"
                   name="filter"
@@ -76,7 +76,7 @@ export default function Main() {
                 Undone
               </label>
 
-              <label>
+              <label className="flex gap-2">
                 <input
                   type="radio"
                   name="filter"
