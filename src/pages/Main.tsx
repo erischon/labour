@@ -28,6 +28,8 @@ export default function Main() {
     await updateDoc(docRef, {
       isDone: !isDone,
     });
+
+    setIsModified(true);
   }
 
   useEffect(() => {
