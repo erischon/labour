@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 import { useTaskContext } from "../contexts/TaskContext";
 
 type FormEditTaskProps = {
-  setTask: (task: string) => void;
-  addTask: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  id: string;
+  taskName: string;
+  editTask: (updatedTask: string, id: string) => void;
   onClose: () => void;
 };
 
@@ -11,16 +14,19 @@ type FormEditTaskProps = {
  * @version 1.0.0
  */
 export default function FormEditTask({
-  setTask,
-  addTask,
+  id,
+  taskName,
+  editTask,
   onClose,
 }: FormEditTaskProps) {
   const { setIsModified } = useTaskContext();
+  const [updatedTask, setUpdatedTask] = useState(taskName);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await addTask(e);
+    await editTask(updatedTask, id);
+
     setIsModified(true);
     onClose();
   };
@@ -32,8 +38,8 @@ export default function FormEditTask({
           <input
             className="text-black p-2 w-96"
             type="text"
-            placeholder="What do you have to do today?"
-            onChange={(e) => setTask(e.target.value)}
+            value={updatedTask}
+            onChange={(e) => setUpdatedTask(e.target.value)}
           />
 
           <button
