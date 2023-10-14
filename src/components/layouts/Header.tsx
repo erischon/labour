@@ -73,15 +73,14 @@ export default function Header() {
           </ul>
         </nav>
 
-        <button
-          className="py-2 px-6 bg-slate-500 flex items-center gap-2"
-          onClick={() => setOpen(true)}
-        >
-          <div className="text-xl text-slate-100">
-            <MdAddTask />
-          </div>
-          Add Task
-        </button>
+        <Link to="/tasks">
+          <button className="py-2 px-6 bg-slate-500 flex items-center gap-2">
+            <div className="text-xl text-slate-100">
+              <MdAddTask />
+            </div>
+            Add Task
+          </button>
+        </Link>
       </header>
     </>
   );
