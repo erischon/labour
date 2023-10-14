@@ -6,7 +6,7 @@ import { db } from "../libs/firebase";
 import { getTask } from "../libs/getTask";
 import FormEditTask from "../components/FormEditTask";
 
-export async function loader({ params }: { params: { id: string } }) {
+export async function loader({ params }: any) {
   const task = await getTask(params.id);
   const id = params.id;
 
