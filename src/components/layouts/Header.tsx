@@ -25,7 +25,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        <Link to="/tasks">
+        <Link to="/tasks/add">
           <button className="py-2 px-6 bg-slate-500 flex items-center gap-2">
             <div className="text-xl text-slate-100">
               <MdAddTask />
