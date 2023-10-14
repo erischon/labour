@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { BiEdit, BiTrash } from "react-icons/bi";
 
-import { useModalContext } from "../contexts/ModalContext";
+import { Link } from "react-router-dom";
 
 type TaskItemProps = {
   id: string;
@@ -24,7 +24,6 @@ export function TaskItem({
   deleteTask,
 }: TaskItemProps) {
   const [isDoneTask, setIsDoneTask] = useState(isDone);
-  const { setOpenEdit } = useModalContext();
 
   useEffect(() => {
     setIsDoneTask(isDone);
@@ -55,10 +54,9 @@ export function TaskItem({
           onClick={() => deleteTask(id)}
         />
 
-        <BiEdit
-          className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
-          onClick={() => setOpenEdit(true)}
-        />
+        <Link to={`/tasks/${id}/edit`}>
+          <BiEdit className="cursor-pointer text-slate-300 text-lg hover:text-slate-400" />
+        </Link>
       </div>
     </div>
   );
