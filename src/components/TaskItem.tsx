@@ -4,8 +4,6 @@ import { BiEdit, BiTrash } from "react-icons/bi";
 
 import { useModalContext } from "../contexts/ModalContext";
 
-import EditTask from "../libs/editTask";
-
 type TaskItemProps = {
   id: string;
   taskName: string;
@@ -33,39 +31,35 @@ export function TaskItem({
   }, [isDone]);
 
   return (
-    <>
-      <EditTask id={id} />
+    <div className="grid grid-cols-12 px-5 py-1">
+      <div className="col-span-10 flex gap-2 items-center">
+        <input
+          id={id}
+          type="checkbox"
+          className="cursor-pointer peer"
+          defaultChecked={isDoneTask}
+          onChange={() => toggleTask(id, isDoneTask)}
+        />
 
-      <div className="grid grid-cols-12 px-5 py-1">
-        <div className="col-span-10 flex gap-2 items-center">
-          <input
-            id={id}
-            type="checkbox"
-            className="cursor-pointer peer"
-            defaultChecked={isDoneTask}
-            onChange={() => toggleTask(id, isDoneTask)}
-          />
-
-          <label
-            htmlFor={id}
-            className="cursor-pointer peer-checked:line-through peer-checked:text-slate-500 line-clamp-1"
-          >
-            {taskName}
-          </label>
-        </div>
-
-        <div className="col-span-2 flex gap-3 items-center justify-center">
-          <BiTrash
-            className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
-            onClick={() => deleteTask(id)}
-          />
-
-          <BiEdit
-            className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
-            onClick={() => setOpenEdit(true)}
-          />
-        </div>
+        <label
+          htmlFor={id}
+          className="cursor-pointer peer-checked:line-through peer-checked:text-slate-500 line-clamp-1"
+        >
+          {taskName}
+        </label>
       </div>
-    </>
+
+      <div className="col-span-2 flex gap-3 items-center justify-center">
+        <BiTrash
+          className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
+          onClick={() => deleteTask(id)}
+        />
+
+        <BiEdit
+          className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
+          onClick={() => setOpenEdit(true)}
+        />
+      </div>
+    </div>
   );
 }
