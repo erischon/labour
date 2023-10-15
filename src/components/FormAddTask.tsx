@@ -1,28 +1,28 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useTaskContext } from "../contexts/TaskContext";
 
 type FormAddTaskProps = {
-  setTask: (task: string) => void;
-  addTask: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
-  onClose: () => void;
+  addTask: (task: string) => Promise<void>;
 };
 
 /**
  * @description Form for adding a task to the database
  * @version 1.0.0
  */
-export default function FormAddTask({
-  setTask,
-  addTask,
-  onClose,
-}: FormAddTaskProps) {
+export default function FormAddTask({ addTask }: FormAddTaskProps) {
+  const [task, setTask] = useState("");
   const { setIsModified } = useTaskContext();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await addTask(e);
+    await addTask(task);
     setIsModified(true);
-    onClose();
+    navigate("/");
   };
 
   return (

@@ -1,28 +1,29 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useTaskContext } from "../contexts/TaskContext";
 
 type FormEditTaskProps = {
-  setTask: (task: string) => void;
-  addTask: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
-  onClose: () => void;
+  editTask: (task: string) => Promise<void>;
+  task: { taskName: string; id: string };
 };
 
 /**
  * @description Form for adding a task to the database
  * @version 1.0.0
  */
-export default function FormEditTask({
-  setTask,
-  addTask,
-  onClose,
-}: FormEditTaskProps) {
+export default function FormEditTask({ editTask, task }: FormEditTaskProps) {
+  const [updatedTask, setUpdatedTask] = useState(task.taskName);
   const { setIsModified } = useTaskContext();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await addTask(e);
+    await editTask(updatedTask);
     setIsModified(true);
-    onClose();
+    navigate("/");
   };
 
   return (
@@ -32,8 +33,8 @@ export default function FormEditTask({
           <input
             className="text-black p-2 w-96"
             type="text"
-            placeholder="What do you have to do today?"
-            onChange={(e) => setTask(e.target.value)}
+            value={updatedTask}
+            onChange={(e) => setUpdatedTask(e.target.value)}
           />
 
           <button
