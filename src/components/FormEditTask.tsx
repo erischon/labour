@@ -9,10 +9,16 @@ type FormEditTaskProps = {
 };
 
 /**
- * @description Form for adding a task to the database
- * @version 1.0.0
+ * Renders a form to edit a task.
+ * @param {Object} props - The component props.
+ * @param {Function} props.editTask - The function to edit the task.
+ * @param {Object} props.task - The task to be edited.
+ * @returns {JSX.Element} - The rendered component.
  */
-export default function FormEditTask({ editTask, task }: FormEditTaskProps) {
+export default function FormEditTask({
+  editTask,
+  task,
+}: FormEditTaskProps): JSX.Element {
   const [updatedTask, setUpdatedTask] = useState(task.taskName);
   const { setIsModified } = useTaskContext();
 

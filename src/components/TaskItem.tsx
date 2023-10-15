@@ -1,29 +1,38 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { BiEdit, BiTrash } from "react-icons/bi";
 
-import { Link } from "react-router-dom";
+import { deleteTask } from "../libs/deleteTask";
+import { toggleTask } from "../libs/toggleTask";
+import { useTaskContext } from "../contexts/TaskContext";
 
 type TaskItemProps = {
   id: string;
   taskName: string;
   isDone: boolean;
-  toggleTask: (id: string, isDone: boolean) => void;
-  deleteTask: (id: string) => void;
 };
 
 /**
- * @description TaskItem component
- * @version 1.0.0
+ * Renders a single task item with its name, completion status, and delete/edit buttons.
+ * @param {TaskItemProps} props - The props object containing the task item's id, name, and completion status.
+ * @returns {JSX.Element} - The JSX element representing the task item.
  */
-export function TaskItem({
-  id,
-  taskName,
-  isDone,
-  toggleTask,
-  deleteTask,
-}: TaskItemProps) {
+export function TaskItem({ id, taskName, isDone }: TaskItemProps): JSX.Element {
   const [isDoneTask, setIsDoneTask] = useState(isDone);
+  const { setIsModified } = useTaskContext();
+
+  async function handleDelete(id: string) {
+    await deleteTask(id);
+
+    setIsModified(true);
+  }
+
+  async function handleToggle(id: string, isDone: boolean) {
+    await toggleTask(id, isDone);
+
+    setIsModified(true);
+  }
 
   useEffect(() => {
     setIsDoneTask(isDone);
@@ -37,7 +46,7 @@ export function TaskItem({
           type="checkbox"
           className="cursor-pointer peer"
           defaultChecked={isDoneTask}
-          onChange={() => toggleTask(id, isDoneTask)}
+          onChange={() => handleToggle(id, isDoneTask)}
         />
 
         <label
@@ -51,7 +60,7 @@ export function TaskItem({
       <div className="col-span-2 flex gap-3 items-center justify-center">
         <BiTrash
           className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
-          onClick={() => deleteTask(id)}
+          onClick={() => handleDelete(id)}
         />
 
         <Link to={`/tasks/${id}/edit`}>

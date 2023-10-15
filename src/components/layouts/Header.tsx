@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { HiPencilSquare } from "react-icons/hi2";
 import { MdAddTask } from "react-icons/md";
 
-export default function Header() {
+/**
+ * Renders the header component with a logo, navigation links and an "Add Task" button.
+ * @returns JSX.Element
+ */
+export default function Header(): JSX.Element {
   return (
     <>
       <header className="flex justify-between items-center w-full px-10 py-5 max-w-5xl mx-auto">

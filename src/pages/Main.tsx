@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
-import { db } from "../libs/firebase";
 import { TaskItem } from "../components/TaskItem";
 import { useTaskContext } from "../contexts/TaskContext";
 
@@ -14,24 +12,6 @@ import { getAllTasks } from "../libs/getAllTasks";
 export default function Main() {
   const { tasks, setTasks, isModified, setIsModified } = useTaskContext();
   const [filter, setFilter] = useState("all");
-
-  // Delete a task.
-  async function deleteTask(id: string) {
-    await deleteDoc(doc(db, "tasks", id));
-
-    setIsModified(true);
-  }
-
-  // Toggle a task.
-  async function toggleTask(id: string, isDone: boolean) {
-    const docRef = doc(db, "tasks", id);
-
-    await updateDoc(docRef, {
-      isDone: !isDone,
-    });
-
-    setIsModified(true);
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,12 +84,7 @@ export default function Main() {
               }
             })
             .map((task) => (
-              <TaskItem
-                key={task.id}
-                {...task}
-                toggleTask={toggleTask}
-                deleteTask={deleteTask}
-              />
+              <TaskItem key={task.id} {...task} />
             ))}
         </div>
       </div>

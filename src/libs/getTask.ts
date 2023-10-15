@@ -2,6 +2,11 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { db } from "./firebase";
 
+/**
+ * Retrieves a task from the database by its ID.
+ * @param id - The ID of the task to retrieve.
+ * @returns A Promise that resolves with the retrieved task, or undefined if the task does not exist.
+ */
 export async function getTask(id: string) {
   const docRef = doc(db, "tasks", id);
 

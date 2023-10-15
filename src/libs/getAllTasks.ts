@@ -9,7 +9,10 @@ type Task = {
   isDone: boolean;
 };
 
-// Get all tasks.
+/**
+ * Retrieves all tasks from the "tasks" collection in Firestore.
+ * @returns A Promise that resolves with an array of Task objects.
+ */
 export async function getAllTasks() {
   const querySnapshot = await getDocs(collection(db, "tasks"));
 
