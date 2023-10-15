@@ -4,8 +4,15 @@ import { db } from "../libs/firebase";
 
 import FormAddTask from "../components/FormAddTask";
 
+/**
+ * Renders the AddTask component.
+ * @returns JSX element
+ */
 export default function AddTask() {
-  // Add a new task with a generated id.
+  /**
+   * Adds a new task to the database.
+   * @param task - The task to be added.
+   */
   async function addTask(task: string) {
     try {
       const docRef = await addDoc(collection(db, "tasks"), {

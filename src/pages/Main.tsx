@@ -6,8 +6,8 @@ import { useTaskContext } from "../contexts/TaskContext";
 import { getAllTasks } from "../libs/getAllTasks";
 
 /**
- * @description Main layout
- * @version 1.0.0
+ * Renders the main page.
+ * @returns {JSX.Element} - The rendered component.
  */
 export default function Main() {
   const { tasks, setTasks, isModified, setIsModified } = useTaskContext();
