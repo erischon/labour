@@ -1,12 +1,4 @@
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  updateDoc,
-  getDocs,
-  getDoc,
-} from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 import { db } from "../libs/firebase";
 
@@ -18,30 +10,36 @@ type Task = {
 };
 
 /**
- * Adds a new task to the Firestore database.
- * @param task - The name of the task to add.
- * @returns A Promise that resolves with the ID of the newly created document.
+ * Adds a new task to the local storage.
+ * @param task - The name of the task to be added.
+ * @returns A Promise that resolves with void when the task is added to the local storage.
  */
 export async function addTask(task: string): Promise<void> {
-  try {
-    const docRef = await addDoc(collection(db, "tasks"), {
-      taskName: task,
-      createdAt: new Date(),
-      isDone: false,
-    });
+  const oldTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding task: ", e);
-  }
+  const newTask = {
+    id: Math.random().toString(36).slice(2, 14),
+    taskName: task,
+    createdAt: new Date(),
+    isDone: false,
+  };
+
+  const newTasks = [...oldTasks, newTask];
+
+  localStorage.setItem("tasks", JSON.stringify(newTasks));
 }
 
 /**
- * Deletes a task from the "tasks" collection in Firestore.
- * @param id The ID of the task to delete.
+ * Deletes a task from local storage by its ID.
+ * @param id - The ID of the task to be deleted.
+ * @returns A Promise that resolves with void when the task is deleted.
  */
 export async function deleteTask(id: string) {
-  await deleteDoc(doc(db, "tasks", id));
+  const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+  const newTasks = tasks.filter((task: Task) => task.id !== id);
+
+  localStorage.setItem("tasks", JSON.stringify(newTasks));
 }
 
 /**
@@ -50,51 +48,37 @@ export async function deleteTask(id: string) {
  * @returns Promise<void>
  */
 export async function editTask(id: string, updatedTask: string): Promise<void> {
-  try {
-    const docRef = doc(db, "tasks", id);
+  const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  const task = tasks.find((task: Task) => task.id === id);
 
-    await updateDoc(docRef, {
-      taskName: updatedTask,
-    });
-  } catch (e) {
-    console.error("Error adding task: ", e);
-  }
+  const taskIndex = tasks.findIndex((task: Task) => task.id === id);
+
+  tasks[taskIndex] = { ...task, taskName: updatedTask };
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 /**
- * Retrieves all tasks from the "tasks" collection in Firestore.
- * @returns A Promise that resolves with an array of Task objects.
+ * Retrieves all tasks from local storage.
+ * @returns {Promise<Array>} An array of tasks.
  */
 export async function getAllTasks() {
-  const querySnapshot = await getDocs(collection(db, "tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-  const tasksData: Task[] = [];
-
-  querySnapshot.forEach((doc) => {
-    tasksData.push({ id: doc.id, ...doc.data() } as Task);
-  });
-
-  return tasksData;
+  return tasks;
 }
 
 /**
- * Retrieves a task from the database by its ID.
+ * Retrieves a task from local storage by its ID.
  * @param id - The ID of the task to retrieve.
- * @returns A Promise that resolves with the retrieved task, or undefined if the task does not exist.
+ * @returns The task object if found, otherwise logs an error message to the console.
  */
 export async function getTask(id: string) {
-  const docRef = doc(db, "tasks", id);
+  const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-  const docSnap = await getDoc(docRef);
+  const task = tasks.find((task: Task) => task.id === id);
 
-  if (docSnap.exists()) {
-    const task = docSnap.data();
-
-    return task;
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
+  return task ? task : console.log("No such document!");
 }
 
 /**
