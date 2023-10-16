@@ -3,7 +3,7 @@ import { TaskContextProvider } from "../contexts/TaskContext.tsx";
 import Header from "../components/layouts/Header";
 import Footer from "../components/layouts/Footer";
 
-import Main from "../pages/Main.tsx";
+import Main from "../pages/Main.page.tsx";
 
 /**
  * Renders the root route of the application.

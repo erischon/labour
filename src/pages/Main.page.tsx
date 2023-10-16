@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { TaskItem } from "../components/TaskItem";
 import { useTaskContext } from "../contexts/TaskContext";
 
-import { getAllTasks } from "../libs/getAllTasks";
+import { getAllTasks } from "../utils/task.util";
 
 /**
  * Renders the main page.
  * @returns {JSX.Element} - The rendered component.
  */
-export default function Main() {
+export default function Main(): JSX.Element {
   const { tasks, setTasks, isModified, setIsModified } = useTaskContext();
   const [filter, setFilter] = useState("all");
 

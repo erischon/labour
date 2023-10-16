@@ -1,4 +1,4 @@
-import { getTask } from "./getTask";
+import { getTask } from "./task.util";
 
 /**
  * Asynchronously loads the task with the given ID and returns it along with the ID.

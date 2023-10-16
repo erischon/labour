@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useTaskContext } from "../contexts/TaskContext";
 
-import { addTask } from "../libs/addTask";
+import { addTask } from "../utils/task.util";
 
 /**
  * Renders a form to add a new task.

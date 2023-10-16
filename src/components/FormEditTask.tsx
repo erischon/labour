@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useTaskContext } from "../contexts/TaskContext";
-import { editTask } from "../libs/editTask";
+import { editTask } from "../utils/task.util";
 
 type FormEditTaskProps = {
   task: { taskName: string };

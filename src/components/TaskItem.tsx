@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 import { BiEdit, BiTrash } from "react-icons/bi";
 
-import { deleteTask } from "../libs/deleteTask";
-import { toggleTask } from "../libs/toggleTask";
+import { deleteTask, toggleTask } from "../utils/task.util";
 import { useTaskContext } from "../contexts/TaskContext";
 
 type TaskItemProps = {
@@ -58,14 +57,14 @@ export function TaskItem({ id, taskName, isDone }: TaskItemProps): JSX.Element {
       </div>
 
       <div className="col-span-2 flex gap-3 items-center justify-center">
+        <Link to={`/tasks/${id}/edit`}>
+          <BiEdit className="cursor-pointer text-slate-300 text-lg hover:text-slate-400" />
+        </Link>
+
         <BiTrash
           className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
           onClick={() => handleDelete(id)}
         />
-
-        <Link to={`/tasks/${id}/edit`}>
-          <BiEdit className="cursor-pointer text-slate-300 text-lg hover:text-slate-400" />
-        </Link>
       </div>
     </div>
   );
