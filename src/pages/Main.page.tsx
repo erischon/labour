@@ -1,37 +1,17 @@
 import { useEffect, useState } from "react";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
-import { db } from "../libs/firebase";
 import { TaskItem } from "../components/TaskItem";
 import { useTaskContext } from "../contexts/TaskContext";
 
-import { getAllTasks } from "../libs/getAllTasks";
+import { getAllTasks } from "../utils/task.util";
 
 /**
- * @description Main layout
- * @version 1.0.0
+ * Renders the main page.
+ * @returns {JSX.Element} - The rendered component.
  */
-export default function Main() {
+export default function Main(): JSX.Element {
   const { tasks, setTasks, isModified, setIsModified } = useTaskContext();
   const [filter, setFilter] = useState("all");
-
-  // Delete a task.
-  async function deleteTask(id: string) {
-    await deleteDoc(doc(db, "tasks", id));
-
-    setIsModified(true);
-  }
-
-  // Toggle a task.
-  async function toggleTask(id: string, isDone: boolean) {
-    const docRef = doc(db, "tasks", id);
-
-    await updateDoc(docRef, {
-      isDone: !isDone,
-    });
-
-    setIsModified(true);
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,8 +33,8 @@ export default function Main() {
           <div className="col-span-10 flex items-center">
             <p className="mr-10 font-semibold">Tasks</p>
 
-            <div className="flex items-end gap-6 text-sm h-full">
-              <label>
+            <div className="flex items-end gap-6 text-sm font-thin h-full">
+              <label className="flex gap-2">
                 <input
                   type="radio"
                   name="filter"
@@ -65,7 +45,7 @@ export default function Main() {
                 All
               </label>
 
-              <label>
+              <label className="flex gap-2">
                 <input
                   type="radio"
                   name="filter"
@@ -76,7 +56,7 @@ export default function Main() {
                 Undone
               </label>
 
-              <label>
+              <label className="flex gap-2">
                 <input
                   type="radio"
                   name="filter"
@@ -104,12 +84,7 @@ export default function Main() {
               }
             })
             .map((task) => (
-              <TaskItem
-                key={task.id}
-                {...task}
-                toggleTask={toggleTask}
-                deleteTask={deleteTask}
-              />
+              <TaskItem key={task.id} {...task} />
             ))}
         </div>
       </div>

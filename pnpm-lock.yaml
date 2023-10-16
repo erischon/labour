@@ -58,6 +58,9 @@ devDependencies:
   eslint-plugin-react-refresh:
     specifier: ^0.4.3
     version: 0.4.3(eslint@8.51.0)
+  firestore-vitest-mock:
+    specifier: ^0.6.0
+    version: 0.6.0
   jsdom:
     specifier: ^22.1.0
     version: 22.1.0
@@ -2237,6 +2240,10 @@ packages:
       - '@react-native-async-storage/async-storage'
       - encoding
     dev: false
+
+  /firestore-vitest-mock@0.6.0:
+    resolution: {integrity: sha512-IOLqMx/HsrN92LxiTOI/a11767FM2gTYJq72ftsctBB97TFhRA/mcKcSCZ4hHeHdk0XAjgdgDr8oLmOxqzuyYg==}
+    dev: true
 
   /flat-cache@3.1.1:
     resolution: {integrity: sha512-/qM2b3LUIaIgviBQovTLvijfyOQXPtSRnRK26ksj2J7rzPIecePUIpJsZ4T02Qg+xiAEKIs5K8dsHEd+VaKa/Q==}

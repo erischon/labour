@@ -2,17 +2,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useTaskContext } from "../contexts/TaskContext";
+import { editTask } from "../utils/task.util";
 
 type FormEditTaskProps = {
-  editTask: (task: string) => Promise<void>;
-  task: { taskName: string; id: string };
+  task: { taskName: string };
+  id: string;
 };
 
 /**
- * @description Form for adding a task to the database
- * @version 1.0.0
+ * Renders a form to edit a task.
+ * @param {Object} props - The component props.
+ * @param {Function} props.editTask - The function to edit the task.
+ * @param {Object} props.task - The task to be edited.
+ * @returns {JSX.Element} - The rendered component.
  */
-export default function FormEditTask({ editTask, task }: FormEditTaskProps) {
+export default function FormEditTask({
+  task,
+  id,
+}: FormEditTaskProps): JSX.Element {
   const [updatedTask, setUpdatedTask] = useState(task.taskName);
   const { setIsModified } = useTaskContext();
 
@@ -21,7 +28,7 @@ export default function FormEditTask({ editTask, task }: FormEditTaskProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await editTask(updatedTask);
+    await editTask(id, updatedTask);
     setIsModified(true);
     navigate("/");
   };
