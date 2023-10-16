@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootRoute from "./routes/Root.route.tsx";
 import TasksRoute from "./routes/Tasks.route.tsx";
 import ErrorPage from "./error-page.tsx";
-import { loader as taskLoader } from "./pages/EditTask.tsx";
+import { loader as taskLoader } from "./libs/editTask.loader.ts";
 
-import AddTask from "./pages/AddTask.tsx";
-import EditTask from "./pages/EditTask.tsx";
+import AddTask from "./pages/AddTask.page.tsx";
+import EditTask from "./pages/EditTask.page.tsx";
 
 import "./index.css";
 

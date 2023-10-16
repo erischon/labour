@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useTaskContext } from "../contexts/TaskContext";
+import { editTask } from "../libs/editTask";
 
 type FormEditTaskProps = {
-  editTask: (task: string) => Promise<void>;
-  task: { taskName: string; id: string };
+  task: { taskName: string };
+  id: string;
 };
 
 /**
@@ -16,8 +17,8 @@ type FormEditTaskProps = {
  * @returns {JSX.Element} - The rendered component.
  */
 export default function FormEditTask({
-  editTask,
   task,
+  id,
 }: FormEditTaskProps): JSX.Element {
   const [updatedTask, setUpdatedTask] = useState(task.taskName);
   const { setIsModified } = useTaskContext();
@@ -27,7 +28,7 @@ export default function FormEditTask({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await editTask(updatedTask);
+    await editTask(id, updatedTask);
     setIsModified(true);
     navigate("/");
   };
