@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useTaskContext } from "../contexts/TaskContext";
 
-type FormAddTaskProps = {
-  addTask: (task: string) => Promise<void>;
-};
+import { addTask } from "../libs/addTask";
 
 /**
  * Renders a form to add a new task.
@@ -13,9 +11,7 @@ type FormAddTaskProps = {
  * @param {Function} props.addTask - The function to add a new task.
  * @returns {JSX.Element} - The rendered component.
  */
-export default function FormAddTask({
-  addTask,
-}: FormAddTaskProps): JSX.Element {
+export default function FormAddTask(): JSX.Element {
   const [task, setTask] = useState("");
   const { setIsModified } = useTaskContext();
 
