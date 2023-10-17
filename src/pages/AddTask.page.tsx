@@ -4,7 +4,7 @@ import FormAddTask from "../components/FormAddTask";
  * Renders the AddTask component.
  * @returns JSX element
  */
-export default function AddTask() {
+export default function AddTaskPage() {
   return (
     <div className="flex justify-center flex-1 w-full mt-10">
       <div>
