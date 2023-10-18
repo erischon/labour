@@ -15,19 +15,25 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
+const fakeTask = {
+  id: "1",
+  taskName: "Fake task",
+  isDone: false,
+};
+
 describe("TaskItem", () => {
-  it("", () => {
+  it("render the task name", () => {
     // Arrange
     render(
       <TaskContextProvider>
-        <TaskItem id="1" taskName="task" isDone={false} />
+        <TaskItem {...fakeTask} />
       </TaskContextProvider>
     );
 
     // Act
-    const link = screen.queryByText("task");
+    const taskName = screen.queryByText(fakeTask.taskName);
 
     // Assert
-    expect(link).toBeInTheDocument();
+    expect(taskName).toBeInTheDocument();
   });
 });

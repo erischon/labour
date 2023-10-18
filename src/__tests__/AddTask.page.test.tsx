@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { screen } from "@testing-library/react";
 
-import { renderWithRouter } from "./testUtils";
+import { renderWithRouter } from "./utils/testUtils";
 
 import { TaskContextProvider } from "../contexts/TaskContext";
 

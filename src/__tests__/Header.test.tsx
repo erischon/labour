@@ -15,6 +15,17 @@ vi.mock("react-router-dom", async () => {
 });
 
 describe("Header", () => {
+  it("renders the logo", () => {
+    // Arrange
+    render(<Header />);
+
+    // Act
+    const logo = screen.queryByText("Labour");
+
+    // Assert
+    expect(logo).toBeInTheDocument();
+  });
+
   it("renders a link to the Main page", () => {
     // Arrange
     render(<Header />);
@@ -24,5 +35,16 @@ describe("Header", () => {
 
     // Assert
     expect(link).toBeInTheDocument();
+  });
+
+  it("render a add button", () => {
+    // Arrange
+    render(<Header />);
+
+    // Act
+    const buttonTitle = screen.queryByText("Add Task");
+
+    // Assert
+    expect(buttonTitle).toBeInTheDocument();
   });
 });
