@@ -25,6 +25,6 @@ describe("ErrorPage", () => {
     console.log("======", apologies);
 
     // Assert
-    expect(apologies).toBeInTheDocument();
+    expect(apologies).not.toBeNull();
   });
 });

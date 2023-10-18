@@ -20,7 +20,7 @@ describe("AddTaskPage", () => {
     const title = screen.queryByText("Add Task");
 
     // Assert
-    expect(title).toBeInTheDocument();
+    expect(title).not.toBeNull();
   });
 
   it("should render an input box", () => {});

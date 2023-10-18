@@ -21,7 +21,7 @@ describe("RootRoute", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("Tasks")).toBeInTheDocument();
+    expect(screen.getByText("Tasks")).not.toBeNull();
   });
 });
 
@@ -40,6 +40,6 @@ describe("TasksRoute", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
+    expect(screen.getByText("Home")).not.toBeNull();
   });
 });

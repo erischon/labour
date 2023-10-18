@@ -23,7 +23,7 @@ describe("Header", () => {
     const logo = screen.queryByText("Labour");
 
     // Assert
-    expect(logo).toBeInTheDocument();
+    expect(logo).not.toBeNull();
   });
 
   it("renders a link to the Main page", () => {
@@ -34,7 +34,7 @@ describe("Header", () => {
     const link = screen.queryByText("Home");
 
     // Assert
-    expect(link).toBeInTheDocument();
+    expect(link).not.toBeNull();
   });
 
   it("render a add button", () => {
@@ -45,6 +45,6 @@ describe("Header", () => {
     const buttonTitle = screen.queryByText("Add Task");
 
     // Assert
-    expect(buttonTitle).toBeInTheDocument();
+    expect(buttonTitle).not.toBeNull();
   });
 });

@@ -34,6 +34,6 @@ describe("TaskItem", () => {
     const taskName = screen.queryByText(fakeTask.taskName);
 
     // Assert
-    expect(taskName).toBeInTheDocument();
+    expect(taskName).not.toBeNull();
   });
 });

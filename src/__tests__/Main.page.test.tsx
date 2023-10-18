@@ -19,7 +19,7 @@ describe("MainPage", () => {
     const actionsTitle = screen.queryByText("Actions");
 
     // Assert
-    expect(tasksTitle).toBeInTheDocument();
-    expect(actionsTitle).toBeInTheDocument();
+    expect(tasksTitle).not.toBeNull();
+    expect(actionsTitle).not.toBeNull();
   });
 });
