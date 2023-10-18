@@ -23,6 +23,8 @@ export default defineConfig({
         "**/tailwind.config.js",
         "**/tsconfig.json",
         "**/__tests__/**",
+        ".eslintrc.cjs",
+        "**/utils/**",
       ],
     },
   },
