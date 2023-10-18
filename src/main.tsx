@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import RootRoute from "./routes/Root.route.tsx";
 import TasksRoute from "./routes/Tasks.route.tsx";
-import ErrorPage from "./error-page.tsx";
+import ErrorPage from "./pages/Error.page.tsx";
 import { loader as taskLoader } from "./utils/editTask.loader.ts";
 
 import AddTask from "./pages/AddTask.page.tsx";

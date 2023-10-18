@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import Footer from "../../components/layouts/Footer";
+import Footer from "../components/layouts/Footer";
 
 describe("Footer", () => {
   it("renders the current year in the copyright", () => {

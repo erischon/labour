@@ -13,7 +13,7 @@ type Task = {
  * Renders the EditTask page component.
  * @returns JSX element
  */
-export default function EditTask() {
+export default function EditTaskPage() {
   const { task, id } = useLoaderData() as { task: Task; id: string };
 
   return (
