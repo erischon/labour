@@ -38,7 +38,7 @@ export default function FormEditTask({
       <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
         <div className="flex flex-col md:flex-row gap-4">
           <input
-            className="text-black p-2 w-96"
+            className="text-black p-2 md:w-96"
             type="text"
             value={updatedTask}
             onChange={(e) => setUpdatedTask(e.target.value)}

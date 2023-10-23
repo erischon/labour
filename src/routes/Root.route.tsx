@@ -14,7 +14,7 @@ export default function RootRoute() {
   return (
     <>
       <TaskContextProvider>
-        <div className="w-full h-screen flex flex-col justify-between">
+        <div className="w-full min-h-screen flex flex-col justify-between">
           <Header />
 
           <div className="flex flex-1">

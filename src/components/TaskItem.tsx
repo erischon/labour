@@ -38,8 +38,8 @@ export function TaskItem({ id, taskName, isDone }: TaskItemProps): JSX.Element {
   }, [isDone]);
 
   return (
-    <div className="grid grid-cols-12 px-5 py-1">
-      <div className="col-span-10 flex gap-2 items-center">
+    <div className="flex flex-col md:grid md:grid-cols-12 md:px-5 py-1 gap-y-2 mb-2">
+      <div className="md:col-span-10 flex gap-2 items-center">
         <input
           id={id}
           type="checkbox"
@@ -50,19 +50,19 @@ export function TaskItem({ id, taskName, isDone }: TaskItemProps): JSX.Element {
 
         <label
           htmlFor={id}
-          className="cursor-pointer peer-checked:line-through peer-checked:text-slate-500 line-clamp-1"
+          className="cursor-pointer peer-checked:line-through peer-checked:text-slate-500 line-clamp-1 text-ellipsis overflow-hidden text-lg"
         >
           {taskName}
         </label>
       </div>
 
-      <div className="col-span-2 flex gap-3 items-center justify-center">
+      <div className="md:col-span-2 flex pl-5 md:justify-center items-center gap-5 md:gap-3 text-xl">
         <Link to={`/tasks/${id}/edit`}>
-          <BiEdit className="cursor-pointer text-slate-300 text-lg hover:text-slate-400" />
+          <BiEdit className="cursor-pointer text-slate-300 hover:text-slate-400" />
         </Link>
 
         <BiTrash
-          className="cursor-pointer text-slate-300 text-lg hover:text-slate-400"
+          className="cursor-pointer text-slate-300 hover:text-slate-400"
           onClick={() => handleDelete(id)}
         />
       </div>

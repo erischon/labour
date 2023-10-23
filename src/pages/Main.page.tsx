@@ -27,11 +27,11 @@ export default function MainPage(): JSX.Element {
   }, [isModified, setIsModified, setTasks]);
 
   return (
-    <main className="my-10 px-10 py-5 w-full max-w-4xl mx-auto">
+    <main className="my-10 p-5 md:px-10 md:py-5 w-full max-w-4xl mx-auto">
       <div className="w-full" id="tasks-list">
-        <div className="grid grid-cols-12 px-5 py-2 mb-3 bg-slate-700 rounded-sm">
-          <div className="col-span-10 flex items-center">
-            <p className="mr-10 font-semibold">Tasks</p>
+        <div className="md:grid md:grid-cols-12 px-5 py-2 mb-3 bg-slate-700 rounded-sm">
+          <div className="md:col-span-10 flex items-center justify-center md:justify-start">
+            <p className="mr-10 font-semibold hidden md:block">Tasks</p>
 
             <div className="flex items-end gap-6 text-sm font-thin h-full">
               <label className="flex gap-2">
@@ -69,7 +69,9 @@ export default function MainPage(): JSX.Element {
             </div>
           </div>
 
-          <div className="col-span-2 text-center font-semibold">Actions</div>
+          <div className="md:col-span-2 text-center font-semibold hidden md:block">
+            Actions
+          </div>
         </div>
 
         <div className="">

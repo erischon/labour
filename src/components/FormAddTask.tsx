@@ -30,7 +30,7 @@ export default function FormAddTask(): JSX.Element {
       <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
         <div className="flex flex-col md:flex-row gap-4">
           <input
-            className="text-black p-2 w-96"
+            className="text-black p-2 md:w-96"
             type="text"
             placeholder="What do you have to do today?"
             onChange={(e) => setTask(e.target.value)}
