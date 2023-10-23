@@ -4,7 +4,7 @@
  */
 export default function Footer() {
   return (
-    <footer className="px-10 py-5 w-full max-w-5xl mx-auto text-xs text-center">
+    <footer className="px-10 py-5 w-full max-w-5xl mx-auto text-xs text-center md:text-start">
       <p>
         © 2023-{new Date().getFullYear()}{" "}
         <a
