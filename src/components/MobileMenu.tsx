@@ -8,13 +8,13 @@ export default function MobileMenu() {
     <nav className="md:hidden fixed bottom-[60px] left-0 bg-slate-900 w-full">
       <ul className="flex justify-center items-center gap-10 p-3">
         <li>
-          <Link to="/">
+          <Link to="/" className="">
             <FaHome className="text-2xl" />
           </Link>
         </li>
 
         <li>
-          <Link to="/tasks/add">
+          <Link to="/tasks/add" className="">
             <MdAddTask className="text-2xl" />
           </Link>
         </li>
