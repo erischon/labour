@@ -17,7 +17,7 @@ export default function EditTaskPage() {
   const { task, id } = useLoaderData() as { task: Task; id: string };
 
   return (
-    <div className="flex justify-center flex-1 w-full mt-10">
+    <div className="flex justify-center w-full mt-10 px-5">
       <div>
         <h1 className="text-2xl font-bold mb-5">Edit Task</h1>
 

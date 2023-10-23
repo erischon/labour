@@ -17,7 +17,9 @@ export default function TasksRoute() {
         <div className="w-full h-screen flex flex-col justify-between">
           <Header />
 
-          <Outlet />
+          <div className="flex-1">
+            <Outlet />
+          </div>
 
           <Footer />
         </div>
