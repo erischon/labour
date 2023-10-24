@@ -5,7 +5,7 @@ import { MdAddTask } from "react-icons/md";
 
 export default function MobileMenu() {
   return (
-    <nav className="md:hidden fixed bottom-[60px] left-0 bg-slate-900 w-full">
+    <nav className="md:hidden fixed bottom-0 left-0 bg-slate-900 w-full">
       <ul className="flex justify-center items-center gap-10 p-3">
         <li>
           <Link to="/" className="" aria-label="Home button">
