@@ -10,7 +10,7 @@ export default function Footer() {
         <a
           href="https://www.erischon.dev"
           target="_blank"
-          className="text-bold text-slate-300 hover:text-slate-50"
+          className="text-bold text-slate-300 underline hover:text-slate-50"
         >
           {" "}
           Eri Schön

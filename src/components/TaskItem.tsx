@@ -50,19 +50,20 @@ export function TaskItem({ id, taskName, isDone }: TaskItemProps): JSX.Element {
 
         <label
           htmlFor={id}
-          className="cursor-pointer peer-checked:line-through peer-checked:text-slate-500 line-clamp-1 text-ellipsis overflow-hidden text-lg"
+          className="cursor-pointer peer-checked:line-through peer-checked:text-slate-300 line-clamp-1 text-ellipsis overflow-hidden text-lg"
         >
           {taskName}
         </label>
       </div>
 
       <div className="md:col-span-2 flex pl-5 md:justify-center items-center gap-5 md:gap-3 text-xl">
-        <Link to={`/tasks/${id}/edit`}>
+        <Link to={`/tasks/${id}/edit`} aria-label="Edit button">
           <BiEdit className="cursor-pointer text-slate-300 hover:text-slate-400" />
         </Link>
 
         <BiTrash
           className="cursor-pointer text-slate-300 hover:text-slate-400"
+          aria-label="Delete button"
           onClick={() => handleDelete(id)}
         />
       </div>
