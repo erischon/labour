@@ -32,7 +32,7 @@ https://labour.erischon.dev/
 
 ## Tech Stack
 
-**Client:** React, React Router DOM, TailwindCSS
+**Client:** React, Typescript, React Router DOM, TailwindCSS
 
 
 
