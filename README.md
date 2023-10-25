@@ -16,7 +16,7 @@ https://labour.erischon.dev/
 
 ## Screenshots
 
-![App Screenshot](https://labour.erischon.dev/labour-ss-01.png)
+![App Screenshot](https://labour.erischon.dev/labour-screen.webp)
 
 
 ## Features
